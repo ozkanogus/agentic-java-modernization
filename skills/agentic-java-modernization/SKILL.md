@@ -52,6 +52,8 @@ Do not change production code during initial discovery.
 
 Create or update `.modernization/REPOSITORY_PROFILE.md` with concise facts supported by repository evidence. Prefer paths, configuration keys, and reproducible commands over speculation. Mark unknowns explicitly.
 
+Adapt [assets/REPOSITORY_PROFILE.template.md](assets/REPOSITORY_PROFILE.template.md) when creating the artifact.
+
 Do not turn the profile into a source-code inventory or duplicate the README.
 
 ## Phase 2 — Establish Documentation
@@ -60,6 +62,8 @@ Create or improve:
 
 - `README.md` for human understanding, local development, testing, deployment, and operations;
 - `AGENTS.md` for exact commands, constraints, conventions, generated areas, hazards, and mandatory checks.
+
+Adapt [assets/README.template.md](assets/README.template.md) and [assets/AGENTS.template.md](assets/AGENTS.template.md) rather than copying irrelevant sections unchanged.
 
 Preserve useful existing content. Include only sections supported by evidence and important to this repository.
 
@@ -80,6 +84,8 @@ Use unit, integration, contract, characterization, and smoke tests according to 
 
 Record commands, results, meaningful coverage, protected flows, gaps, and accepted exceptions in `.modernization/TEST_BASELINE.md`.
 
+Use [assets/TEST_BASELINE.template.md](assets/TEST_BASELINE.template.md) as the concise evidence structure.
+
 Do not begin migration execution without an acceptable recorded baseline and the required approval.
 
 ## Phase 4 — Assess Compatibility
@@ -97,6 +103,8 @@ Separate confirmed facts, inferences, unknowns, and blocked paths. A supported f
 ## Phase 5 — Plan the Migration Graph
 
 Write `.modernization/MIGRATION_PLAN.md`. Model stages as a dependency-aware graph rather than a universal version ladder.
+
+Adapt [assets/MIGRATION_PLAN.template.md](assets/MIGRATION_PLAN.template.md) to the repository.
 
 For every proposed stage, specify:
 
@@ -138,6 +146,8 @@ Never proceed based only on compilation success.
 ## Phase 8 — Finalize Documentation
 
 Update affected repository documentation and `.modernization/MIGRATION_REPORT.md`. Record executed stages, important changes, verification results, deviations, unresolved risks, and recommended follow-up.
+
+Use [assets/MIGRATION_REPORT.template.md](assets/MIGRATION_REPORT.template.md) for the final evidence-based report.
 
 Report measured results only. Do not fabricate coverage, effort savings, compatibility, or business outcomes.
 
