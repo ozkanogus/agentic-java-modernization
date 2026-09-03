@@ -37,6 +37,8 @@ If the request is ambiguous, default to Analyze. Planning does not imply permiss
 
 Locate the repository root and applicable repository instructions. Inspect the build from wrapper and configuration files before relying on README claims.
 
+Read [references/discovery.md](references/discovery.md) for the evidence order, migration-sensitive surfaces, and repository-profile quality standard.
+
 Capture at least:
 
 - modules, source sets, entry points, and important business flows;
@@ -66,6 +68,8 @@ Create or improve:
 Adapt [assets/README.template.md](assets/README.template.md) and [assets/AGENTS.template.md](assets/AGENTS.template.md) rather than copying irrelevant sections unchanged.
 
 Preserve useful existing content. Include only sections supported by evidence and important to this repository.
+
+Read [references/documentation.md](references/documentation.md) to keep README, AGENTS.md, repository profile, and migration artifacts distinct and concise.
 
 ## Phase 3 — Build the Test Safety Net
 
