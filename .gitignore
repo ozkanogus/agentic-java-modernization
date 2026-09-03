@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Java build output
+target/
+build/
+.gradle/
+out/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# OpenRewrite output
+rewrite.log
+rewrite.patch
+rewrite-datatables/
