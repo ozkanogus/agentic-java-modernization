@@ -75,6 +75,8 @@ Read [references/documentation.md](references/documentation.md) to keep README, 
 
 Run the existing build and tests before adding or changing tests. If the baseline is red, record the failures and decide whether preparation can safely continue.
 
+Read [references/testing.md](references/testing.md) for risk-based test selection, characterization technique, coverage interpretation, and red-baseline handling.
+
 Prioritize characterization of observable behavior in this order when relevant:
 
 1. critical business services and workflows;
