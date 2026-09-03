@@ -22,4 +22,20 @@ Suggested commit prefixes include `docs:`, `feat:`, `fix:`, `test:`, and `chore:
 
 ## Skill Validation
 
-After the skill package is introduced, validate it with the skill-creator validator documented in the repository architecture.
+From the repository root, run:
+
+```bash
+skills-ref validate ./skills/agentic-java-modernization
+git diff --check
+```
+
+`skills-ref` is the validator documented by the Agent Skills specification and must be installed separately. If it is unavailable, validation is not complete merely because the Markdown renders.
+
+Also verify:
+
+- every local link resolves relative to the file containing it;
+- `SKILL.md` contains no unfinished scaffold markers;
+- referenced files are loaded only for the phases that need them;
+- templates contain no repository-specific or confidential content;
+- volatile compatibility claims point to current authoritative sources;
+- the working tree is clean before merging.
