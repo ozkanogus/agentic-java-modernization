@@ -141,6 +141,8 @@ When OpenRewrite is considered, read [references/openrewrite.md](references/open
 
 Use agent-assisted edits for repository-specific gaps that deterministic tooling cannot safely resolve. Do not expand the stage merely because adjacent modernization opportunities appear.
 
+When IBM Bob is selected and available, read [references/ibm-bob.md](references/ibm-bob.md) for its optional provider role, public/private boundary, prerequisite checks, and independent verification requirements.
+
 ## Phase 7 — Verify the Stage
 
 Inspect the complete diff and run the planned checks. Include the full relevant build and test suite plus applicable coverage, contract, startup, integration, packaging, configuration, or operational checks.
