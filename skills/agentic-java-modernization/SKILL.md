@@ -1,6 +1,7 @@
 ---
 name: agentic-java-modernization
 description: Safely assess, prepare, plan, execute, and verify incremental modernization of established Java repositories. Use for Java or Spring upgrades, legacy application discovery, characterization-test baselines, migration planning, or staged modernization. Do not use it to redesign business behavior or force a predetermined target version.
+license: Apache-2.0
 ---
 
 # Agentic Java Modernization

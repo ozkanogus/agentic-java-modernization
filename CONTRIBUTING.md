@@ -29,7 +29,7 @@ skills-ref validate ./skills/agentic-java-modernization
 git diff --check
 ```
 
-`skills-ref` is the validator documented by the Agent Skills specification and must be installed separately. If it is unavailable, validation is not complete merely because the Markdown renders.
+`skills-ref` is the demonstration reference validator documented by the Agent Skills specification. It currently requires Python 3.11 or newer and is installed from the [`agentskills/agentskills`](https://github.com/agentskills/agentskills/tree/main/skills-ref) source repository. Follow that repository's current installation instructions rather than assuming it is available as a standalone package. If it is unavailable, validation is not complete merely because the Markdown renders.
 
 Also verify:
 
