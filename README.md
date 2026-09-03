@@ -14,10 +14,29 @@ Long-lived Java applications often combine valuable production behavior with old
 
 This project treats modernization as an evidence-driven lifecycle:
 
-```text
-Discover → Profile → Document → Protect behavior → Assess compatibility
-    → Plan a migration graph → Approve one stage → Execute → Verify → Report
+```mermaid
+flowchart TD
+    A[Repository] --> B[Discover]
+    B --> C[Repository profile]
+    C --> D[Documentation baseline]
+    C --> E[Test safety net]
+    D --> F[Green baseline]
+    E --> F
+    F --> G[Compatibility assessment]
+    G --> H[Migration graph]
+    H --> I{Human approval}
+    I -->|Not approved| J[Revise or stop]
+    I -->|Approved| K[Execute one stage]
+    K --> L[Build, test, and inspect]
+    L --> M{Stage green?}
+    M -->|No| N[Fix within scope or stop]
+    M -->|Yes| O[Document evidence]
+    O --> P{Another approved stage?}
+    P -->|Yes| K
+    P -->|No| Q[Final report]
 ```
+
+The detailed phase model, artifact responsibilities, and quality gates are documented in [the architecture](docs/architecture.md).
 
 ## Principles
 
