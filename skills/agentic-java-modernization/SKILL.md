@@ -96,6 +96,8 @@ Do not begin migration execution without an acceptable recorded baseline and the
 
 ## Phase 4 — Assess Compatibility
 
+Read [references/migration-planning.md](references/migration-planning.md) for evidence classification, whole-stack assessment, target selection, graph construction, and approval rules.
+
 Derive candidate targets and intermediate steps from repository facts. Check current authoritative sources for volatile compatibility information, including:
 
 - Java and framework requirements;
