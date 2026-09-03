@@ -143,6 +143,8 @@ Use agent-assisted edits for repository-specific gaps that deterministic tooling
 
 Inspect the complete diff and run the planned checks. Include the full relevant build and test suite plus applicable coverage, contract, startup, integration, packaging, configuration, or operational checks.
 
+Read [references/verification.md](references/verification.md) for layered checks, baseline comparison, failure handling, evidence capture, and stage exit decisions.
+
 Compare failures with the recorded baseline:
 
 - **Green:** document evidence and mark only this stage complete.
