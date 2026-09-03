@@ -137,6 +137,8 @@ When using a deterministic transformation:
 4. apply only the approved scope;
 5. retain the tool output needed for diagnosis without committing noisy artifacts.
 
+When OpenRewrite is considered, read [references/openrewrite.md](references/openrewrite.md) for recipe selection, licensing, preview, execution, and diagnostic rules.
+
 Use agent-assisted edits for repository-specific gaps that deterministic tooling cannot safely resolve. Do not expand the stage merely because adjacent modernization opportunities appear.
 
 ## Phase 7 — Verify the Stage
