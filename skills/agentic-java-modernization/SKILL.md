@@ -1,6 +1,6 @@
 ---
 name: agentic-java-modernization
-description: Safely assess, prepare, plan, execute, and verify incremental modernization of established Java repositories. Use for Java or Spring upgrades, legacy application discovery, characterization-test baselines, migration planning, or staged modernization. Do not use it to redesign business behavior or force a predetermined target version.
+description: Safely assess, prepare, plan, execute, and verify incremental modernization and production readiness of established Java repositories. Use for Java or Spring upgrades, legacy discovery, characterization-test baselines, migration planning, staged modernization, or post-migration readiness review. Do not use it to redesign business behavior or force a predetermined target.
 license: Apache-2.0
 ---
 
@@ -15,6 +15,7 @@ Determine which mode the user requested:
 - **Analyze:** discover the repository, prepare its profile, assess documentation and tests, and stop before migration planning or execution.
 - **Prepare:** use discovery and baseline evidence to propose a compatibility-driven migration graph; stop before changing runtime or framework versions.
 - **Execute:** perform exactly the next approved migration stage, verify it, report the outcome, and stop before another stage.
+- **Review readiness:** assess a technically migrated application for production readiness without assuming deployment authorization.
 - **Full workflow:** advance through preparation autonomously, but pause for explicit approval before the first migration stage and at any later unresolved decision gate.
 
 If the request is ambiguous, default to Analyze. Planning does not imply permission to execute.
@@ -33,6 +34,8 @@ If the request is ambiguous, default to Analyze. Planning does not imply permiss
 - Stop after a red stage. Do not continue to the next stage.
 - Treat uncertain compatibility or behavior as a decision requiring evidence or human input.
 - Keep credentials, proprietary material, and private organizational context within their authorized environment.
+- Never equate core migration completion with production readiness.
+- Keep one current snapshot in profile/plan artifacts; put chronological execution evidence in the migration report or focused result records.
 
 ## Phase 0 — Discover
 
@@ -158,13 +161,52 @@ Compare failures with the recorded baseline:
 
 Never proceed based only on compilation success.
 
-## Phase 8 — Finalize Documentation
+## Phase 8 — Mark Core Migration Complete
+
+Mark this milestone only when all approved runtime/framework stages and their
+verification gates are green. It means the selected technical target was reached;
+it does not mean the application is safe to deploy.
+
+## Phase 9 — Review Production Readiness
+
+Read [references/production-readiness.md](references/production-readiness.md).
+Assess only applicable concerns: configuration and secrets, schema delivery,
+security, CI, deployment, observability, dependency/warning debt, operational
+rollback, and residual business-flow tests.
+
+Classify each finding as `BLOCKER`, `REQUIRED BEFORE PROD`, `RECOMMENDED`,
+`DEFERRED`, or `NOT APPLICABLE`, with evidence, owner, and next action. Secret
+externalization does not replace rotation of credentials that may have been
+exposed. Introducing Flyway, Liquibase, or another schema tool is a separate
+repository-specific decision, not a universal requirement.
+
+## Phase 10 — Validate Deployment and Regression
+
+Where authorized infrastructure exists, validate the production candidate in a
+representative non-production environment. Run applicable startup/smoke,
+integration, regression, operational, manual QA, and business UAT checks. Record
+checks that cannot run and the resulting risk. Local startup is not deployment
+validation, and CI success is not deployment authorization.
+
+For a long-running modernization, read
+[references/branching.md](references/branching.md). Synchronize current
+production changes into the modernization line at controlled intervals and rerun
+the affected gates. Respect repository policy on merge versus rebase.
+
+## Phase 11 — Finalize Documentation and Report
 
 Update affected repository documentation and `.modernization/MIGRATION_REPORT.md`. Record executed stages, important changes, verification results, deviations, unresolved risks, and recommended follow-up.
 
 Use [assets/MIGRATION_REPORT.template.md](assets/MIGRATION_REPORT.template.md) for the final evidence-based report.
 
-Report measured results only. Do not fabricate coverage, effort savings, compatibility, or business outcomes.
+Report measured results only. Do not fabricate coverage, effort savings,
+compatibility, deployment validation, or business outcomes. State separately:
+
+- core migration status;
+- production-readiness status;
+- deployment/regression/UAT status;
+- remaining risks and required owners;
+- whether production integration is approved, pending, or out of scope.
 
 ## Completion Contract
 
@@ -176,3 +218,9 @@ A modernization stage is complete only when:
 - repository artifacts reflect the resulting state;
 - remaining risks and the next possible stage are visible;
 - no subsequent stage was executed without approval.
+
+Production integration is a separate human-controlled transition. It requires
+the applicable readiness findings to be resolved or accepted, representative
+deployment/regression evidence, synchronization with production truth, and the
+repository's normal review and release policy. Never merge, deploy, or release
+merely because this skill reports a green core migration.

@@ -1,201 +1,238 @@
 # Agentic Java Modernization
 
-A vendor-neutral, agent-assisted methodology for modernizing established Java applications safely.
+A vendor-neutral, evidence-driven method for modernizing established Java
+applications with one capable coding agent, deterministic tools, CI, and human
+approval gates.
 
-The project helps a coding agent understand an application, improve its documentation, establish a behavioral test safety net, assess compatibility, and execute one approved migration stage at a time. It does not assume every repository should reach the newest Java or Spring Boot release.
+## Release Status
 
-## Status
+v1.0 release candidate. The core workflow has been exercised against the public
+[SpringBootSampleERP pilot](docs/case-studies/spring-boot-sample-erp.md). Review
+and hosted validation are still required before tagging v1.0.0.
 
-v0.1 is under development. The repository currently contains the core skill, its focused reference guides, reusable artifact templates, and the project architecture.
+## The Problem
 
-## Why This Project Exists
+An old Java application can compile after a framework upgrade and still break
+API contracts, persistence, transactions, serialization, security, configuration,
+or operations. This project makes the current behavior and risks visible before
+changing the platform, then advances through small, independently verified stages.
 
-Long-lived Java applications often combine valuable production behavior with old runtimes, incomplete documentation, uneven tests, and dependency constraints. A framework upgrade that only makes the code compile can still change API contracts, persistence, security, serialization, configuration, or operational behavior.
+It is intended for maintainers and coding-agent users modernizing existing Java
+or Spring applications. It does not promise autonomous, zero-risk migration,
+guaranteed compatibility, or automatic production readiness.
 
-This project treats modernization as an evidence-driven lifecycle:
+## Lifecycle
 
 ```mermaid
 flowchart TD
-    A[Repository] --> B[Discover]
-    B --> C[Repository profile]
-    C --> D[Documentation baseline]
-    C --> E[Test safety net]
-    D --> F[Green baseline]
-    E --> F
-    F --> G[Compatibility assessment]
-    G --> H[Migration graph]
-    H --> I{Human approval}
-    I -->|Not approved| J[Revise or stop]
-    I -->|Approved| K[Execute one stage]
-    K --> L[Build, test, and inspect]
-    L --> M{Stage green?}
-    M -->|No| N[Fix within scope or stop]
-    M -->|Yes| O[Document evidence]
-    O --> P{Another approved stage?}
-    P -->|Yes| K
-    P -->|No| Q[Final report]
+    A[Repository] --> B[Discovery and profile]
+    B --> C[Documentation baseline]
+    B --> D[Test safety net]
+    C --> E[Green baseline]
+    D --> E
+    E --> F[Compatibility assessment]
+    F --> G[Migration plan]
+    G --> H{Human approval}
+    H -->|revise or stop| G
+    H -->|approved| I[One migration stage]
+    I --> J[Deterministic verification]
+    J -->|red or inconclusive| K[Stop and diagnose]
+    J -->|green| L{More approved stages?}
+    L -->|yes| I
+    L -->|no| M[Core migration complete]
+    M --> N[Production readiness review]
+    N --> O[Deployment and regression/UAT gates]
+    O --> P[Migration report]
+    P --> Q{Human production integration decision}
 ```
 
-The detailed phase model, artifact responsibilities, and quality gates are documented in [the architecture](docs/architecture.md).
+The architecture and artifact contracts are explained in
+[docs/architecture.md](docs/architecture.md).
 
-## Principles
-
-- Understand the repository before changing it.
-- Preserve current observable business behavior.
-- Separate pre-existing failures from migration regressions.
-- Let compatibility analysis determine targets and intermediate stages.
-- Prefer reviewable deterministic transformations where suitable.
-- Require human approval before migration execution.
-- Build and test after every migration stage.
-- Stop when a stage is red or evidence is inconclusive.
-- Keep the public project free of proprietary or confidential material.
-
-## What v0.1 Provides
-
-- Repository discovery and concise profiling
-- README and `AGENTS.md` responsibility boundaries
-- Characterization-test and meaningful-coverage strategy
-- Compatibility-driven target selection and migration graphs
-- Incremental execution and verification gates
-- Optional OpenRewrite integration guidance
-- Optional IBM Bob integration using public capabilities only
-- Templates for repository profile, test baseline, migration plan, and report
-
-The project deliberately does not include custom migration code, custom OpenRewrite recipes, multi-agent orchestration, example applications, or CI packages yet. Those require evidence from a pilot repository.
-
-## Repository Structure
+## v1 Architecture
 
 ```text
-.
-├── README.md
-├── AGENTS.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── docs/
-│   └── architecture.md
-└── skills/
-    └── agentic-java-modernization/
-        ├── SKILL.md
-        ├── agents/
-        │   └── openai.yaml
-        ├── references/
-        │   ├── discovery.md
-        │   ├── documentation.md
-        │   ├── testing.md
-        │   ├── migration-planning.md
-        │   ├── verification.md
-        │   ├── openrewrite.md
-        │   └── ibm-bob.md
-        └── assets/
-            └── *.template.md
+one target repository
+        +
+one capable coding agent
+        +
+one reusable modernization skill
+        +
+deterministic tools and CI
+        +
+human approval gates
 ```
 
-See [docs/architecture.md](docs/architecture.md) for phase gates, artifact responsibilities, integration boundaries, and v0.1 scope.
+Agents analyze, propose, and implement bounded work. Builds, tests, CI, and
+other deterministic systems verify. Humans approve risky transitions. v1 does
+not introduce a team of specialized agents.
+
+## Core Principles
+
+- Discover the repository before changing production behavior.
+- Capture observable behavior with meaningful characterization and regression tests.
+- Record a green or explicitly accepted baseline before migration.
+- Derive targets and intermediate stages from compatibility evidence; never force
+  a universal Java or Spring Boot ladder.
+- Execute one approved stage, inspect the entire diff, and stop while red.
+- Keep business redesign and broad refactoring separate from platform migration.
+- Treat coverage as a quality signal, not the objective. Approximately 80%
+  meaningful line coverage may guide investment where realistic, but test counts
+  and percentages do not replace protected critical flows.
+- Distinguish core migration completion from production readiness.
+
+## Artifacts Produced in a Target Repository
+
+```text
+README.md                         human onboarding and operations
+AGENTS.md                         exact agent working rules and commands
+.modernization/
+├── REPOSITORY_PROFILE.md         concise current-state knowledge
+├── TEST_BASELINE.md              tests, protected behavior, coverage, gaps
+├── MIGRATION_PLAN.md             targets, stages, gates, branches, approvals
+└── MIGRATION_REPORT.md           actual outcomes, evidence, readiness, risks
+```
+
+Templates are under
+[`skills/agentic-java-modernization/assets/`](skills/agentic-java-modernization/assets/).
+Remove irrelevant sections rather than shipping empty boilerplate.
+
+## Core Migration Is Not Production Readiness
+
+**Core Migration Complete** means the selected runtime/framework target was
+reached through green approved stages. **Production Ready** additionally requires
+applicable configuration/secrets, database delivery, CI, security, deployment,
+observability, rollback, and residual business-test findings to be resolved or
+accepted and representative deployment/regression evidence to be green.
+
+Readiness findings use `BLOCKER`, `REQUIRED BEFORE PROD`, `RECOMMENDED`,
+`DEFERRED`, and `NOT APPLICABLE`. Moving a password to an environment variable
+does not rotate an exposed credential. Adding Flyway or Liquibase is not a
+universal requirement and does not make existing-schema adoption automatic.
+
+## Incremental Branching
+
+For long-running work, the recommended conceptual model is:
+
+```text
+main/master                      current production truth
+modernization/integration        future production candidate
+modernization/<stage>            short-lived stage from the migration plan
+```
+
+Stage branches flow through the integration line and its CI/test environment.
+Production changes are synchronized into that line regularly, followed by
+reverification, so the final candidate is not based on an obsolete snapshot.
+Merge versus rebase remains a repository/team decision. Short migrations may use
+the repository's normal PR flow without adding a long-lived integration branch.
+
+See [the branching guide](skills/agentic-java-modernization/references/branching.md).
 
 ## Install or Load the Skill
 
-The package follows the public [Agent Skills specification](https://agentskills.io/specification). The portable skill directory is:
+The portable package follows the public
+[Agent Skills specification](https://agentskills.io/specification):
 
 ```text
 skills/agentic-java-modernization/
 ```
 
-How a skill is registered varies by coding-agent product and version. Use the product's current skill-management workflow to add that entire directory; do not copy only `SKILL.md`, because the references and templates are part of the package.
-
-For local Codex development, a typical source checkout can be linked into the personal skill directory:
+Register that whole directory through your coding agent's current skill workflow;
+the references and templates are part of the package. For local Codex development,
+a source checkout may be linked without copying it:
 
 ```bash
 mkdir -p ~/.codex/skills
 ln -s "$(pwd)/skills/agentic-java-modernization" ~/.codex/skills/agentic-java-modernization
 ```
 
-Run that command from this repository root. If the destination already exists, inspect it instead of overwriting it. Restart or reload the coding agent if its current version does not detect newly added skills automatically.
-
-For Claude Code, Cursor, IBM Bob, or another skill-aware agent, use its current documented import/location mechanism. If the product does not support Agent Skills directly, provide `SKILL.md` and only the referenced guide needed for the current phase as explicit context. Keep approval gates intact.
+Run from this repository root. Inspect an existing destination rather than
+overwriting it, then reload the agent if needed. For Claude Code, Cursor, IBM Bob,
+or another capable agent, use its documented skill/context mechanism and retain
+the same approval gates.
 
 ## Usage
 
-The skill supports four modes: Analyze, Prepare, Execute, and Full Workflow. If the request does not clearly authorize planning or execution, it defaults to Analyze.
+If authorization is ambiguous, the skill defaults to analysis and does not
+change runtime or framework versions.
 
-### Analyze Only
-
-```text
-Use the agentic-java-modernization skill to analyze this repository.
-
-Complete repository discovery, create or update the repository profile,
-assess the documentation, and evaluate the current test safety net.
-Do not plan or perform a migration.
-```
-
-Expected outputs include an evidence-based `.modernization/REPOSITORY_PROFILE.md`, documentation findings, and test-baseline assessment. Production code should not change during initial discovery.
-
-### Prepare a Migration
+### Analyze only
 
 ```text
-Use the agentic-java-modernization skill and the current repository profile
-and test baseline to determine the safest modernization path.
-
-Produce a compatibility assessment and staged migration graph.
-Recommend a target and viable stopping points, but do not execute a stage.
+Use the agentic-java-modernization skill to analyze this repository. Complete
+discovery, create or update the repository profile, and assess documentation and
+the test safety net. Do not plan or execute a migration.
 ```
 
-Expected output: `.modernization/MIGRATION_PLAN.md` with evidence, risks, prerequisites, rollback, verification, and approval state for every proposed stage.
-
-### Execute the Next Approved Stage
+### Plan only
 
 ```text
-Use the agentic-java-modernization skill to execute only the next approved
-migration stage in .modernization/MIGRATION_PLAN.md.
-
-Review deterministic options, apply only the approved scope, run the complete
-planned verification, update the migration report, and stop before another stage.
+Use the current profile and test baseline to assess compatibility and produce a
+repository-specific migration graph. Recommend targets and safe stopping points,
+but do not execute any stage.
 ```
 
-A green result completes only that stage. A red or inconclusive result stops progression.
-
-### Full Preparation Workflow
+### Execute the next approved stage
 
 ```text
-Use the agentic-java-modernization skill to prepare this repository for safe
-modernization. Complete discovery, documentation, the test safety net,
-compatibility assessment, and migration planning.
-
-Pause for my explicit approval before changing runtime or framework versions.
+Execute only the next approved stage in .modernization/MIGRATION_PLAN.md. Inspect
+the complete diff, run every defined verification gate, update evidence, and stop
+before another stage.
 ```
 
-## Tool Integrations
-
-### OpenRewrite
-
-OpenRewrite can perform deterministic transformations after the skill identifies an appropriate migration stage. Recipe applicability, composition, artifact coordinates, distribution, and license must be checked against current documentation. Preview and review the complete change before application, then run repository-specific verification.
-
-See [the OpenRewrite integration guide](skills/agentic-java-modernization/references/openrewrite.md).
-
-### IBM Bob
-
-IBM Bob can be selected as an optional capability provider for publicly documented analysis, Java modernization, unit-test generation, iterative build/test/fix work, and validation. Bob output must still satisfy the same vendor-neutral artifacts and independent gates.
-
-IBM-specific private configuration and repository context must remain outside this public project. See [the IBM Bob integration guide](skills/agentic-java-modernization/references/ibm-bob.md).
-
-## Generated Repository Artifacts
-
-When applied to a target application, the skill keeps human and agent documentation at the repository root and groups modernization evidence under `.modernization/`:
+### Review production readiness
 
 ```text
-README.md
-AGENTS.md
-.modernization/
-├── REPOSITORY_PROFILE.md
-├── TEST_BASELINE.md
-├── MIGRATION_PLAN.md
-└── MIGRATION_REPORT.md
+The core migration is complete. Assess production readiness and classify only
+applicable findings. Record deployment/regression checks and gaps, but do not
+merge, release, migrate data, or deploy without explicit authorization.
 ```
 
-Templates are under [`skills/agentic-java-modernization/assets/`](skills/agentic-java-modernization/assets/). Remove irrelevant sections instead of leaving empty boilerplate.
+## Verification Philosophy
 
-## Contributing
+A migration stage is not complete because an agent says it is complete. It is
+complete only when its repository-specific gates pass. Depending on risk, those
+gates include Maven/Gradle build, unit and integration tests, characterization
+and contract tests, comparable coverage, startup/smoke, packaging, dependency,
+schema, migration-specific, and delivery checks. CI provides independent evidence
+and must not be weakened merely to obtain green status.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Changes should remain focused, vendor-neutral, evidence-based, and free of confidential material.
+## Optional Integrations
+
+[OpenRewrite](skills/agentic-java-modernization/references/openrewrite.md) can
+apply reviewable deterministic transformations after compatibility assessment,
+stage approval, exact recipe/version/licensing review, and preferably a dry run.
+It is not required and never replaces behavioral verification.
+
+[IBM Bob](skills/agentic-java-modernization/references/ibm-bob.md) can be selected
+for publicly documented analysis, testing, migration, and verification
+capabilities. It is optional. No IBM-internal configuration, documentation,
+repository information, prompts, credentials, or customer data belongs here.
+
+## Repository Structure
+
+```text
+.
+├── .github/
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/validate.yml
+├── docs/
+│   ├── architecture.md
+│   └── case-studies/spring-boot-sample-erp.md
+├── scripts/validate_repository.rb
+└── skills/agentic-java-modernization/
+    ├── SKILL.md
+    ├── agents/openai.yaml
+    ├── assets/*.template.md
+    └── references/*.md
+```
+
+## Contributing and Governance
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). With one maintainer, v1 encourages PRs
+where practical and requires meaningful CI without an impossible second-person
+approval. Multi-maintainer review rules and CODEOWNERS can be added when they
+provide real enforcement value.
 
 ## License
 

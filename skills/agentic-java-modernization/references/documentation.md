@@ -73,6 +73,10 @@ Update the profile when a stage changes:
 
 Do not update it for incidental implementation details with no modernization relevance.
 
+Keep chronological stage evidence out of the current-state profile. Use the
+migration report or focused result records for superseded checkpoints, and make
+the report's current milestone/status visibly distinct from historical entries.
+
 ## Writing Rules
 
 - Preserve established repository terminology.

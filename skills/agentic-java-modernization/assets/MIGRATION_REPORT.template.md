@@ -6,7 +6,10 @@ Updated: [YYYY-MM-DD]
 
 - Starting state:
 - Resulting state:
-- Overall status: `COMPLETE`, `PARTIAL`, `BLOCKED`, or `ROLLED BACK`
+- Core migration status: `COMPLETE`, `PARTIAL`, `BLOCKED`, or `ROLLED BACK`
+- Production-readiness status: `READY`, `NOT READY`, or `NOT ASSESSED`
+- Deployment/regression/UAT status:
+- Production integration: `APPROVED`, `PENDING`, or `OUT OF SCOPE`
 - Business behavior outcome:
 - Remaining recommended target, if any:
 
@@ -28,6 +31,28 @@ Updated: [YYYY-MM-DD]
 | Packaging/deployment validation | | | |
 
 Report measured values only. Use `Not measured` or `Not applicable` rather than estimating.
+
+## Production Readiness Findings
+
+| Finding | Classification | Evidence | Action/owner |
+| --- | --- | --- | --- |
+| | `BLOCKER`, `REQUIRED BEFORE PROD`, `RECOMMENDED`, `DEFERRED`, or `NOT APPLICABLE` | | |
+
+Record secret names or locations only; never reproduce values. State whether a
+potentially exposed credential requires rotation. Externalization alone is not rotation.
+
+## Deployment, Regression, and UAT
+
+| Environment/check | Result | Evidence | Limitation or owner |
+| --- | --- | --- | --- |
+| | `PASS`, `FAIL`, `NOT RUN`, or `NOT APPLICABLE` | | |
+
+## Production Synchronization
+
+- Production-truth revision last synchronized:
+- Synchronization method:
+- Conflict decisions:
+- Verification rerun after synchronization:
 
 ## Important Changes
 
@@ -64,3 +89,4 @@ Report measured values only. Use `Not measured` or `Not applicable` rather than 
 - [ ] `.modernization/REPOSITORY_PROFILE.md`
 - [ ] `.modernization/TEST_BASELINE.md`
 - [ ] `.modernization/MIGRATION_PLAN.md`
+- [ ] Production-readiness and deployment evidence

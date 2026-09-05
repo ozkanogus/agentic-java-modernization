@@ -37,6 +37,8 @@ Baseline status: `GREEN`, `RED`, or `INCONCLUSIVE`
 | | | | | |
 
 Coverage is supporting evidence. Explain exclusions and meaningful gaps; do not add trivial tests solely to increase percentages.
+When coverage cannot be generated, record `Not measured` and the reason rather
+than estimating a percentage or treating test counts as coverage.
 
 ## Pre-existing Failures
 
