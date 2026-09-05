@@ -11,6 +11,7 @@ This repository develops a vendor-neutral methodology and reusable skill for saf
 - Do not prescribe a fixed Java or Spring Boot target without repository-specific compatibility evidence.
 - Do not perform a migration before documenting the baseline, safety-net status, plan, and required approval.
 - Keep migration stages small; stop whenever the current stage is red.
+- Distinguish core migration completion from production readiness and deployment authorization.
 
 ## Working Agreement
 
@@ -25,6 +26,7 @@ This repository develops a vendor-neutral methodology and reusable skill for saf
 Before merging documentation or skill changes:
 
 ```bash
+ruby scripts/validate_repository.rb
 git diff --check
 git status --short
 ```
