@@ -59,6 +59,7 @@ Evidence conventions:
 - Containers/runtime:
 - Deployment model:
 - Health, logging, metrics, and tracing:
+- Last production-truth revision inspected:
 
 ## External Integrations
 
@@ -94,3 +95,7 @@ Evidence conventions:
 | Question | Why it matters | Owner or evidence needed |
 | --- | --- | --- |
 | | | |
+
+Keep this file as the current snapshot. Move superseded stage-by-stage history to
+the migration report or focused result records so later sessions do not mistake
+historical facts for the present state.

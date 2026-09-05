@@ -1,0 +1,32 @@
+name: Validate repository
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Validate skill package, YAML, templates, and links
+        run: ruby scripts/validate_repository.rb
+      - name: Reject whitespace errors
+        run: |
+          if git grep -nI -E '[[:blank:]]+$' -- .; then
+            echo "Trailing whitespace found"
+            exit 1
+          fi

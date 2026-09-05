@@ -210,6 +210,10 @@ After all approved stages are complete:
 - list deferred targets, known limitations, remaining risks, and ownership;
 - report only measured outcomes.
 
+This final core-migration verification does not establish production readiness.
+Continue with [production-readiness.md](production-readiness.md) for applicable
+configuration, security, database, delivery, regression, and operational gates.
+
 ## Verification Review Checklist
 
 - [ ] Stage approval and scope were confirmed before execution.
