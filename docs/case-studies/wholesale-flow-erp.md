@@ -1,7 +1,8 @@
-# Pilot Case Study: SpringBootSampleERP
+# Pilot Case Study: WholesaleFlow ERP
 
-[`ozkanogus/SpringBootSampleERP`](https://github.com/ozkanogus/SpringBootSampleERP)
-is an unfinished grocery ERP backend originally developed for a wholesale market.
+[`ozkanogus/WholesaleFlowERP`](https://github.com/ozkanogus/WholesaleFlowERP)
+is an unfinished wholesale operations backend originally developed for a real
+wholesale grocery market.
 It was never deployed and contained no production data. The public repository
 provided a realistic pilot for this methodology: old framework dependencies,
 limited tests, no README, an incomplete wrapper, embedded database credentials,
@@ -62,12 +63,12 @@ Subsequent isolated stages:
 - added a Java 21 GitHub Actions workflow for default and PostgreSQL builds.
 
 Those changes retained 44 default and 60 PostgreSQL-profile passing tests. The CI
-workflow and its exact commands were validated locally, but no hosted run was
-observed because the pilot commits were not pushed.
+workflow and its exact commands were validated locally. After the product-identity
+rename, both the hosted Java 21 default build and PostgreSQL 18 build passed.
 
 Authentication/authorization, deployment configuration, observability,
-dependency/build warnings, broader business-workflow coverage, hosted CI evidence,
-and rotation of any historically reused credential remain unresolved or require
+dependency/build warnings, broader business-workflow coverage, and rotation of
+any historically reused credential remain unresolved or require
 an owner decision. No production deployment or existing-database adoption was
 performed.
 

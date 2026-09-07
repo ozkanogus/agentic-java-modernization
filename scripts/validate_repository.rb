@@ -10,7 +10,7 @@ errors = []
 
 required = %w[
   README.md AGENTS.md CONTRIBUTING.md LICENSE
-  docs/architecture.md docs/case-studies/spring-boot-sample-erp.md
+  docs/architecture.md docs/case-studies/wholesale-flow-erp.md
   skills/agentic-java-modernization/SKILL.md
   skills/agentic-java-modernization/agents/openai.yaml
   skills/agentic-java-modernization/assets/AGENTS.template.md

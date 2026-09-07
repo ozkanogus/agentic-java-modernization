@@ -211,7 +211,7 @@ DDL. These require explicit ownership and environment-specific evidence.
 
 ## Pilot Feedback Applied to v1
 
-The public SpringBootSampleERP pilot showed that profiles and working agreements
+The public WholesaleFlow ERP pilot showed that profiles and working agreements
 reduced rediscovery, characterization tests exposed behavioral defects before
 framework changes, focused branches made migration failures attributable, and
 human gates contained scope. It also showed that chronological updates can make
