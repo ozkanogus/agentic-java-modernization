@@ -7,7 +7,7 @@ approval gates.
 ## Release Status
 
 v1.0 release candidate. The core workflow has been exercised against the public
-[SpringBootSampleERP pilot](docs/case-studies/spring-boot-sample-erp.md). Review
+[WholesaleFlow ERP pilot](docs/case-studies/wholesale-flow-erp.md). Review
 and hosted validation are still required before tagging v1.0.0.
 
 ## The Problem
@@ -218,7 +218,7 @@ repository information, prompts, credentials, or customer data belongs here.
 │   └── workflows/validate.yml
 ├── docs/
 │   ├── architecture.md
-│   └── case-studies/spring-boot-sample-erp.md
+│   └── case-studies/wholesale-flow-erp.md
 ├── scripts/validate_repository.rb
 └── skills/agentic-java-modernization/
     ├── SKILL.md
